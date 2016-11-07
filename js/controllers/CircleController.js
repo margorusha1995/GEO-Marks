@@ -8,54 +8,58 @@ angular.module('Marks').controller("CircleController", function ($scope) {
      myMap.geoObjects.remove(myCircle);
     };
     
-    setTimeout(function(){
-        myMap = $scope.map;
+    var timer = setInterval(function() {
+        if ($scope.map != undefined) {
+            myMap = $scope.map;
 
-        
             myMap.events.add('click', function (e) {
-        var coords = e.get('coords');
-        circle.x = coords[0];
-        circle.y = coords[1];
+                if ($scope.area) {
+                     var coords = e.get('coords');
+                    circle.x = coords[0];
+                    circle.y = coords[1];
 
-        
-        if(myCircle == undefined) {
-            myCircle = new ymaps.Circle([
-                [circle.x, circle.y],
-                $scope.radius
-            ], {
-                hintContent: "Подвинь меня"
-            }, {
-                draggable: true,
-                fillColor: "#DB709377",
-                strokeColor: "#990066",
-                strokeOpacity: 0.8,
-                strokeWidth: 5
+
+                    if(myCircle == undefined) {
+                        myCircle = new ymaps.Circle([
+                            [circle.x, circle.y],
+                            $scope.radius
+                        ], {
+                            hintContent: "Подвинь меня"
+                        }, {
+                            draggable: true,
+                            fillColor: "#DB709377",
+                            strokeColor: "#990066",
+                            strokeOpacity: 0.8,
+                            strokeWidth: 5
+                        });
+                        myMap.geoObjects.add(myCircle);
+                    } else {
+                        myMap.geoObjects.remove(myCircle);
+                        myCircle = new ymaps.Circle([
+                            [circle.x, circle.y],
+                            $scope.radius
+                        ], {
+                            hintContent: "Подвинь меня"
+                        }, {
+                            draggable: true,
+                            fillColor: "#DB709377",
+                            strokeColor: "#990066",
+                            strokeOpacity: 0.8,
+                            strokeWidth: 5
+                        });
+
+                        myMap.geoObjects.add(myCircle);
+                    }
+                }
             });
-            myMap.geoObjects.add(myCircle);
-           
+
+            clearInterval(timer);
         } else {
-             myMap.geoObjects.remove(myCircle);
-             myCircle = new ymaps.Circle([
-                [circle.x, circle.y],
-                $scope.radius
-            ], {
-                hintContent: "Подвинь меня"
-            }, {
-                draggable: true,
-                fillColor: "#DB709377",
-                strokeColor: "#990066",
-                strokeOpacity: 0.8,
-                strokeWidth: 5
-            });
-
-
-            myMap.geoObjects.add(myCircle);
+            console.log('not ready');
         }
-    });
-    }
-    , 5000);
+    }, 5000);
     
-    
+
     $scope.click = function() {
         console.log($scope.map);
     }
