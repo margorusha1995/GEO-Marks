@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Сервис создания меток</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/bootstrap-switch.css">
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-route.min.js"></script>
+        
+        <script src="js/lib/require.js" data-main="js/script"></script>
+        <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.11.0.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+        <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+        <script src="js/lib/bootstrap-switch.js"></script>
+        <script src="js/script.js"></script>
+        <script src="js/controllers/MainController.js"></script>      
+        <script src="js/controllers/RegistrationController.js"></script>
+        <script src="js/controllers/CircleController.js"></script>
+
+
+    </head>
+    <body ng-app="Marks" ng-controller="mainController" >
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html"><i class="glyphicon glyphicon-map-marker"></i></a>
+                </div>
+
+                <div class="collapse navbar-collapse">
+                    <form class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Введите логин">
+                        </div>
+                        <button type="submit" class="btn btn-default">Поиск</button>
+                    </form>
+                    <ul class="nav navbar-nav navbar-left">
+                        <li><a class="filters" ng-click="showFilter = ! showFilter"><i class="glyphicon glyphicon-sort-by-attributes"></i></a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> {{name}} <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#settings">Настройки профиля</a></li>
+                            <li><a href="#marks">Управление метками</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a>Выход</a></li>
+                        </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="row" ng-hide="showFilter" ng-controller="CircleController">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-1">
+                        <i class="glyphicon glyphicon-remove" ng-click="showFilter = ! showFilter"></i>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Введите город</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                      <div class="col-md-2">
+                          <label>Указать область</label>
+                          <div class="row">
+                              <input type="checkbox" name="my-checkbox" id="switch-change">
+                          </div>
+                    </div>
+                     <div class="col-md-2">
+                          <label>Радиус круга</label>
+                          <div class="row">
+                              <input ng-click="click()" ng-model="radius" type="number" class="form-control" id="circle-radius" min="100" value="1" step="100">
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-10">
+                <div class="col-md-8" id="map">
+                </div>
+                <div class="col-md-4" ng-view ng-controller="RegistrationController">
+                </div>
+            </div>
+            <div class="col-md-1">
+            </div>
+        </div>
+    </body>
+</html>
+
+<script>
+//var circle = {};
+$("[name='my-checkbox']").bootstrapSwitch();
+    
+//var myMap;
+
+//ymaps.ready(init);
+
+//function init () {
+//    myMap = new ymaps.Map('map', {
+//        center: [55.76, 37.64],
+//        zoom: 10
+//    }, 
+//    {
+//        searchControlProvider: 'yandex#search'
+//    },
+//    {
+//        balloonMaxWidth: 200
+//    });
+    
+
+    //пробная метка
+//    myMap.geoObjects
+//        .add(new ymaps.Placemark([55.684758, 37.738521], {
+//             balloonContent: ''
+//        }, 
+//        {
+//            preset: 'islands#icon',
+//            iconColor: '#0095b6'
+//    }));
+
+//
+//    var myPlacemark;
+//    var myCircle;
+
+//    myMap.events.add('click', function (e) {
+//        var coords = e.get('coords');
+////
+////        if (myPlacemark) {
+////            myPlacemark.geometry.setCoordinates(coords);
+////        } else {
+////            myPlacemark = createPlacemark(coords);
+////            myMap.geoObjects.add(myPlacemark);
+////            myPlacemark.events.add('dragend', function () {
+////                getAddress(myPlacemark.geometry.getCoordinates());
+////            });
+////        }
+////
+////        getAddress(coords);
+//        circle.x = coords[0];
+//        circle.y = coords[1];
+////        console.log(circle);
+//
+//        
+//        if(myCircle == undefined) {
+//            // Создаем круг.
+//            myCircle = new ymaps.Circle([
+//                // Координаты центра круга.
+//                [circle.x, circle.y],
+//                // Радиус круга в метрах.
+//                10000
+//            ], {
+//                hintContent: "Подвинь меня"
+//            }, {
+//                draggable: true,
+//                fillColor: "#DB709377",
+//                strokeColor: "#990066",
+//                strokeOpacity: 0.8,
+//                strokeWidth: 5
+//            });
+//
+//            // Добавляем круг на карту.
+//            myMap.geoObjects.add(myCircle);
+//           
+//        } else {
+//             myMap.geoObjects.remove(myCircle);
+//             myCircle = new ymaps.Circle([
+//                // Координаты центра круга.
+//                [circle.x, circle.y],
+//                // Радиус круга в метрах.
+//                10000
+//            ], {
+//                hintContent: "Подвинь меня"
+//            }, {
+//                draggable: true,
+//                fillColor: "#DB709377",
+//                // Цвет обводки.
+//                strokeColor: "#990066",
+//                // Прозрачность обводки.
+//                strokeOpacity: 0.8,
+//                // Ширина обводки в пикселях.
+//                strokeWidth: 5
+//            });
+//
+//            // Добавляем круг на карту.
+//            myMap.geoObjects.add(myCircle);
+//        }
+//    });
+
+//    // Создание метки.
+//    function createPlacemark(coords) {
+//        return new ymaps.Placemark(coords, {
+//                iconCaption: 'поиск...'
+//            }, 
+//            {
+//                preset: 'islands#violetDotIconWithCaption',
+//                draggable: true
+//        });
+//    }
+//
+//    // Определяем адрес по координатам (обратное геокодирование).
+//    function getAddress(coords) {
+//        myPlacemark.properties.set('iconCaption', 'поиск...');
+//        ymaps.geocode(coords).then(function (res) {
+//            var firstGeoObject = res.geoObjects.get(0);
+//
+//            myPlacemark.properties
+//            .set({
+//                iconCaption: firstGeoObject.properties.get('name'),
+//                balloonContent: firstGeoObject.properties.get('text')
+//            });
+//        });
+//    };
+//
+//    // переключатель
+//    $('#switch-change').on('switchChange.bootstrapSwitch', function (e, checked) {
+//        if(checked) {
+//            
+//        }
+//    });
+
+//
+//    // валидация формы
+//    $(function() {
+//        $('#save').click(function() {
+//            var formValid = true;
+////            $('.sign-up').find('input').each(function() {
+////                var formGroup = $(this).parents('.form-group');
+////                var glyphicon = formGroup.find('.form-control-feedback');
+////
+////                if (this.checkValidity()) {
+////                    formGroup.addClass('has-success').removeClass('has-error');
+////                    glyphicon.addClass('glyphicon-ok').removeClass('glyphicon-remove');
+////                } else {
+////                    formGroup.addClass('has-error').removeClass('has-success');
+////                    glyphicon.addClass('glyphicon-remove').removeClass('glyphicon-ok');
+////                    formValid = false;  
+////                }
+////            });
+//            
+//          var myGeocoder = ymaps.geocode($('.sign-up').find('.city-value').val());
+//                myGeocoder.then(
+//            function (res) {
+//                alert('Координаты объекта :' + res.geoObjects.get(0).geometry.getCoordinates());
+//                 if (myPlacemark) {
+//                    myPlacemark.geometry.setCoordinates(res.geoObjects.get(0).geometry.getCoordinates());
+//                } else {
+//                    myPlacemark = createPlacemark(res.geoObjects.get(0).geometry.getCoordinates());
+//                    myMap.geoObjects.add(myPlacemark);
+//                    myPlacemark.events.add('dragend', function () {
+//                        getAddress(myPlacemark.geometry.getCoordinates());
+//                    });
+//                }
+//            },
+//            function (err) {
+//                alert('Город не найден');
+//            }
+//        );
+//
+//            if (formValid) {
+//
+//            }
+//        });
+//    }); 
+
+//}
+</script>
