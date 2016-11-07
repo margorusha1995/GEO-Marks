@@ -1,10 +1,15 @@
 angular.module('Marks').controller("CircleController", function ($scope) {
+    var myMap;
+            var circle = {};
+        var myCircle;
+    $scope.switch = function() {
+      console.log($scope.area); 
+     myMap.geoObjects.remove(myCircle);
+    };
     
     setTimeout(function(){
-         console.log($scope.map);
-        var myMap = $scope.map;
-        var circle = {};
-        var myCircle;
+        myMap = $scope.map;
+
         
             myMap.events.add('click', function (e) {
         var coords = e.get('coords');
