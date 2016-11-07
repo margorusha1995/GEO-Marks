@@ -1,7 +1,7 @@
 angular.module('Marks').controller("CircleController", function ($scope) {
     var myMap;
-            var circle = {};
-        var myCircle;
+    var circle = {};
+    var myCircle;
     $scope.switch = function() {
       console.log($scope.area); 
      myMap.geoObjects.remove(myCircle);
