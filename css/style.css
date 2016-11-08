@@ -31,3 +31,6 @@ select {
 .container {
     background-color: red;
 }
+.alert {
+      transition: all 3s;
+}

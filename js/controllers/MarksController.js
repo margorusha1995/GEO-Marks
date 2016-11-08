@@ -1,5 +1,5 @@
 angular.module('Marks').controller("MarksController", function ($scope, $http, $interval) {
-     var myMap;  
+    var myMap;  
     var myPlacemark;
     ymaps.ready(init);
 
@@ -58,28 +58,31 @@ angular.module('Marks').controller("MarksController", function ($scope, $http, $
                     balloonContent: firstGeoObject.properties.get('text')
                 });
             });
+            
+            $('.alert').addClass('alert-success');
+            $('.alert').removeClass('alert-warning');
         }        
-    };
-    $scope.createMark = function() {
-      var info = {
-          title: $scope.title,
-          note: $scope.note,
-          image: $scope.image,
-          status: $scope.status,
-      };  
-        console.log(info);
     };
     
     $scope.fileNameChanged = function (ele) {
-  var files = ele.files;
-  var l = files.length;
-  var namesArr = [];
-
-  for (var i = 0; i < l; i++) {
-    namesArr.push(files[i].name);
-  }
-        alert('thr');
-}
+        $scope.mark.image = ele.files[0];
+    }
+    
+    $scope.createMark = function (mark, createMarkForm){
+        if (!myPlacemark) {
+            alert('Укажите местоположение, поставив маркер на карту');
+        }
+            if(createMarkForm.$valid && myPlacemark){
+                var info = {
+                  title: $scope.mark.title,
+                  note: $scope.mark.note,
+                  image: $scope.mark.image,
+                  status: $scope.mark.status,
+            };
+                console.log(info);
+                alert(" ваш ответ сохранен");
+            }
+        };
     
  
 
