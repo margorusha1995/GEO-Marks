@@ -19,7 +19,7 @@
         <script src="js/controllers/MainController.js"></script>      
         <script src="js/controllers/RegistrationController.js"></script>
         <script src="js/controllers/CircleController.js"></script>
-
+        <script src="js/controllers/MarksController.js"></script>
 
     </head>
     <body ng-app="Marks" ng-controller="mainController" >
@@ -87,17 +87,8 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-1">
-            </div>
-            <div class="col-md-10">
-                <div class="col-md-8" id="map">
-                </div>
-                <div class="col-md-4" ng-view ng-controller="RegistrationController">
-                </div>
-            </div>
-            <div class="col-md-1">
-            </div>
+        <div class="row" ng-view>
+            
         </div>
     </body>
 </html>
