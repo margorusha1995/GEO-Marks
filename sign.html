@@ -1,23 +1,20 @@
-<<<<<<< HEAD
-       <div><h1>ddd</h1>
-                    <div class="sign-up" ng-hide="showBlock">
-=======
-       <div class="RegistrationController">
+       <div ng-controller="RegistrationController">
            <div class="col-md-1">
             </div>
             <div class="col-md-10">
                 <div class="col-md-8" id="map">
+                    <img src="img/map.png" class="map-loader">
                 </div>
                 <div class="col-md-4" >
                       <div class="sign-up" ng-hide="showBlock">
->>>>>>> Note
+
                         <h2>Регистрация</h2>
-                       <form ng-submit="submit()" role="form" class="form-horizontal">
+                       <form role="form" class="form-horizontal" class="registrationForm" name="registrationForm">
                           <div class="form-group has-feedback">
                             <label for="login" class="control-label">Логин</label>
                               <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>         
-                            <input type="text" class="form-control" required="required" name="login" pattern="[A-Za-z0-9]{6,}" ng-model="login">
+                            <input type="text" class="form-control" required="required" name="login" pattern="[A-Za-z0-9]{5,15}" ng-model="user.login">
                               </div>
                               <span class="glyphicon form-control-feedback"></span>
                           </div>
@@ -26,7 +23,7 @@
                               <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-tasks"></i></span>
                                 <input type="password" class="form-control" required="required" 
-                                       ng-model="password" name="password" pattern="[A-Za-z0-9]{6,}">
+                                       pattern="[A-Za-z0-9]{5,15}" ng-model="user.password">
                               </div>
                               <span class="glyphicon form-control-feedback"></span>
                           </div>
@@ -34,31 +31,32 @@
                             <label>Город</label>                        
                                   <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                                <input ng-model="city" type="text" class="form-control city-value"  name="city" list="cities" >
+                                <input ng-model="user.city" type="text" class="form-control city-value"  name="city" list="cities" >
                               </div>
                           </div>
-                        <button type="submit" class="btn btn-success" id="save">Зарегистрироваться</button>
+                        <button type="submit" class="btn btn-success" ng-click="registrate(user, registrationForm)">Зарегистрироваться</button>
                         <label class="sign-in" ng-click="showBlock = ! showBlock">Войти</label>
                        </form>
                     </div>
-                    <div class="sign-up" ng-show="showBlock">
+                    <div class="sign-in" ng-show="showBlock">
                         <h2>Вход</h2>
-                        <form role="form">
+                        <form role="form" class="signInForm">
                             <div class="form-group">
                                 <label>Логин</label>
-                                <input type="text" class="form-control" ng-model="name">
+                                <input type="text" class="form-control" required="required" ng-model="user.login">
                             </div>
                             <div class="form-group">
                                 <label for="pass">Пароль</label>
-                                <input type="password" class="form-control">
+                                <input type="password" required="required" class="form-control" ng-model="user.password">
                             </div>
-                            <button type="submit" class="btn btn-success">Войти</button>
+                            <button type="submit" class="btn btn-success" ng-click="signIn(user, signInForm)">Войти</button>
                             <label class="sign-up" ng-click="showBlock = ! showBlock">Регистрация</label>
                         </form>
                     </div>
                 </div>
          </div>
-            </div>
+
             <div class="col-md-1">
             </div> 
+                       </div>
                   

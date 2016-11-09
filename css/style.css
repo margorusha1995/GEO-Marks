@@ -1,6 +1,7 @@
  #map {
     height: 500px;
      margin: 0 0 10% 0;
+     z-index: 2;
     }
 .mark-image {
     height: 100px;
@@ -33,4 +34,13 @@ select {
 }
 .alert {
       transition: all 3s;
+}
+.glyphicon-map-marker {
+    color:brown;
+}
+.map-loader {
+    width: 650px;
+    height: 350px;
+    padding: 30px;
+    z-index: -1;
 }

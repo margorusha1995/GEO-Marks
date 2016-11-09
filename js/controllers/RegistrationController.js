@@ -1,22 +1,31 @@
 angular.module('Marks').controller("RegistrationController", function ($scope, $http) {
-//    $scope.submit = function() {
-//        
-//  
-////      var info = {
-////        login: $scope.login,
-////        password: $scope.password,
-////        city: $scope.city,      
-////    };
-////        $http.post("http://192.168.1.189:8000/signup/", info)
-////            .success(function(data, status, headers, config) {
-////                if (status == 200) {
-////                    console.log(data);
-////                }    
-////            })
-////            .error(function(data, status, headers, config) {
-////                alert("AJAX failed!");
-////            });
-//    }
+       var myMap;  
+    var myPlacemark;
+    ymaps.ready(init);
+
+    function init () {
+        myMap = new ymaps.Map('map', {
+            center: [55.76, 37.64],
+            zoom: 10
+        }, 
+        {
+            searchControlProvider: 'yandex#search'
+        },
+        {
+            balloonMaxWidth: 200
+        });  
+        
+        $('.map-loader').hide();
+    };
+    
+    
+    console.log('there');
+    $scope.registrate = function(user, registrationForm) {
+        if(registrationForm.$valid){
+                console.log(user);
+                alert(" ваш ответ сохранен");
+            }
+    }
 
     
 

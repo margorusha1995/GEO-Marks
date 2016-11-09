@@ -7,7 +7,7 @@ angular.module('Marks', ['ngRoute'])
             .when('/marks', {
 				templateUrl: 'marks.html'
 			})
-			.otherwise({
+			.when('/', {
                 templateUrl: 'sign.html'
 			});
 	}]);
